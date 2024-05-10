@@ -1,14 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { join } from 'path';
 import { AppModule } from './app.module';
+import * as hbs from 'hbs';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.useStaticAssets(join(__dirname, '..', 'public'));
+  app.setBaseViewsDir('views/partials');
+  app.setViewEngine('hbs');
 
-  const port = process.env.PORT ? Number(process.env.PORT) : 4228;
+  const port = 3000;
   await app.listen(port);
   console.log(`Server running on http://localhost:${port}`);
 }

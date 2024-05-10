@@ -1,17 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { join } from 'path';
-import handlebarConfig from './handlebars.config';
+import { AppService } from './app.service'; // Импортируем AppService
 
 @Module({
-  imports: [],
   controllers: [AppController],
-  providers: [
-    {
-      provide: 'HANDLEBARS_CONFIG',
-      useValue: handlebarConfig,
-    }
-  ],
+  providers: [AppService], // Добавляем AppService в провайдеры
 })
 export class AppModule {}
