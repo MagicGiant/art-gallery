@@ -5,5 +5,19 @@ import { AppService } from './app.service';
 export class AppController {
   @Get()
   @Render('index')
-  index(){}
+  start(){
+    return {message: 'start index'}
+  }
+
+  @Get('revies')
+  @Render('revies')
+  revies(){
+    return {message: 'nav to revies'}
+  }
+
+  @Get('index')
+  @Render('index')
+  index(){
+    return {message: 'nav to index'}
+  }
 }
