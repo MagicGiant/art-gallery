@@ -1,18 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 import { AppModule } from './app.module';
 import * as hbs from 'hbs';
-import * as path from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  hbs.registerPartials(path.join(__dirname, '..', 'views', 'partials')); 
+  app.useStaticAssets(join(__dirname, '..', 'public'));
+  app.useStaticAssets(join(__dirname, '..', 'views'));
 
-  app.setBaseViewsDir('views');
+  hbs.registerPartials(join(__dirname, '..', 'views/partials'));
   app.setViewEngine('hbs');
 
-  // app.set('view options', { layout: 'layouts/main' }); 
 
   const port = 3000;
   await app.listen(port);
